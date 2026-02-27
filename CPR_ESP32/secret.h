@@ -1,0 +1,7 @@
+#ifndef SECRET_H
+#define SECRET_H
+
+const char* ssid     = "your_ssid";
+const char* password = "your_password";
+
+#endif

@@ -1,0 +1,8 @@
+{
+    "webui" : {
+        "filename_html"   : "remote_xanlite_rgb.html",
+        "filename_h"      : "remote_xanlite_rgb_webui.h",
+        "htmlstring_name" : "xanlite_rgb_webui",
+        "h_guard_block"   : "XANLITE_RGB_WEBUI_H"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "webui" : {
+        "filename_html"   : "index.html",
+        "filename_h"      : "index_webui.h",
+        "htmlstring_name" : "index_webui",
+        "h_guard_block"   : "INDEX_WEBUI_H"
+    }
+}

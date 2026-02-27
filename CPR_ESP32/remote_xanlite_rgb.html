@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Xanlite RGB Remote</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    max-width: 450px;
+}
+
+.btn {
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    user-select: none;
+    border: 1px solid #444;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+</style>
+
+<script>
+function sendCommand(cmd) {
+    fetch("/remote-xanlite-rgb?cmd=" + cmd)
+        .then(response => console.log("Sent:", cmd))
+        .catch(error => console.error(error));
+}
+</script>
+
+</head>
+
+<body>
+
+<h2>Xanlite RGB Remote</h2>
+
+<div class="container">
+    <div class="btn" onclick="sendCommand('BRIGHTER')">+</div>
+    <div class="btn" onclick="sendCommand('DIMMER')">-</div>
+    <div class="btn" onclick="sendCommand('OFF')">Off</div>
+    <div class="btn" onclick="sendCommand('ON')">On</div>
+    
+    <div class="btn" onclick="sendCommand('RED')"        style="background:#ff0000">Red</div>
+    <div class="btn" onclick="sendCommand('GREEN')"      style="background:#00ff00">Green</div>
+    <div class="btn" onclick="sendCommand('WHITE')"      style="background:#ffffff">White</div>
+    <div class="btn" onclick="sendCommand('BLUE')"       style="background:#0000ff">Blue</div>
+    
+    <div class="btn" onclick="sendCommand('ORANGE')"     style="background:#FF6300">Orange</div>
+    <div class="btn" onclick="sendCommand('TEAL')"       style="background:#006D58">Teal</div>
+    <div class="btn" onclick="sendCommand('INDIGO')"     style="background:#5D00FF">Indigo</div>
+    <div class="btn" onclick="sendCommand('FLASH')"      style="background:#808080">Flash</div>
+    
+    <div class="btn" onclick="sendCommand('YELLOW')"     style="background:#FFFF00">Yellow</div>
+    <div class="btn" onclick="sendCommand('CYAN')"       style="background:#00DAD4">Cyan</div>
+    <div class="btn" onclick="sendCommand('LAVENDER')"   style="background:#B300CA">Lavender</div>
+    <div class="btn" onclick="sendCommand('STROBE')"     style="background:#808080">Strobe</div>
+    
+    <div class="btn" onclick="sendCommand('LIME')"       style="background:#37CC35">Lime</div>
+    <div class="btn" onclick="sendCommand('SKYBLUE')"    style="background:#3576CC">Sky Blue</div>
+    <div class="btn" onclick="sendCommand('PURPLE')"     style="background:#84004C">purple</div>
+    <div class="btn" onclick="sendCommand('FADE')"       style="background:#808080">Fade</div>
+      
+    <div class="btn" onclick="sendCommand('LIGHTGREEN')" style="background:#0A9800">Light Green</div>
+    <div class="btn" onclick="sendCommand('LIGHTBLUE')"  style="background:#0062D1">Light Blue</div>
+    <div class="btn" onclick="sendCommand('MAGENTA')"    style="background:#CA0092">Magenta</div>
+    <div class="btn" onclick="sendCommand('SMOOTH')"     style="background:#808080">Smooth</div>
+</div>
+
+</body>
+</html>
