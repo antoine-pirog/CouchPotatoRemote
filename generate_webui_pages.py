@@ -6,6 +6,7 @@ project_folder = "./CPR_ESP32/"
 gen_config_files = glob.glob(f"{project_folder}/*.json")
 
 for gen_config_file in gen_config_files:
+    print(f"Generating h file for {gen_config_file} ...")
     with open(gen_config_file, "r") as f:
         gen_config = json.load(f)
     filename_html   = gen_config["webui"]["filename_html"]
@@ -20,3 +21,4 @@ for gen_config_file in gen_config_files:
             fout.write(f"#define {h_guard_block}\n")
             fout.write(f"const char* {htmlstring_name} = \"{html_string}\";\n")
             fout.write(f"#endif\n")
+print("All done.")
