@@ -7,5 +7,18 @@
 <body>
     <h2>IR Remotes</h2>
     <a href="/remote-xanlite-rgb">Xanlite RGB remote</a>
+
+    <h3>Last IR Command:</h2>
+        <div id="received_ir_command">Waiting...</div>
+
+        <script>
+        setInterval(function() {
+            fetch("/recvir")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("received_ir_command").innerHTML = data;
+            });
+        }, 250);
+        </script>
 </body>
 </html>

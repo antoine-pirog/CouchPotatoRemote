@@ -1,4 +1,4 @@
 #ifndef INDEX_WEBUI_H
 #define INDEX_WEBUI_H
-const char* index_webui = "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<title>IR Remotes</title>\n</head>\n<body>\n<h2>IR Remotes</h2>\n<a href=\"/remote-xanlite-rgb\">Xanlite RGB remote</a>\n</body>\n</html>";
+const char* index_webui = "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<title>IR Remotes</title>\n</head>\n<body>\n<h2>IR Remotes</h2>\n<a href=\"/remote-xanlite-rgb\">Xanlite RGB remote</a>\n\n<h3>Last IR Command:</h2>\n<div id=\"received_ir_command\">Waiting...</div>\n\n<script>\nsetInterval(function() {\nfetch(\"/recvir\")\n.then(response => response.text())\n.then(data => {\ndocument.getElementById(\"received_ir_command\").innerHTML = data;\n});\n}, 250);\n</script>\n</body>\n</html>";
 #endif

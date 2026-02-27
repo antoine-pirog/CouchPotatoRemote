@@ -2,6 +2,7 @@
 #include <cstdint>
 #include "irUtils.h"
 #include "remotes.h"
+#include "context.h"
 
 /* RECEIVER */
 #define RX_DATA_PIN 14
@@ -31,6 +32,7 @@ void irReceiver_init(void){
 
 void irReceiver_handler(void){
     if (IrReceiver.decode()) {
+        // Exhaustive serial print
         Serial.print("Raw data : ");
         Serial.println (IrReceiver.decodedIRData.decodedRawData, HEX);
         Serial.println("All fields : ");
@@ -40,6 +42,13 @@ void irReceiver_handler(void){
         Serial.println("Usage : ");
         IrReceiver.printIRSendUsage(&Serial);
         Serial.println("---------------");
+        // Summary string
+        last_ir_command = "Protocol: " +
+                          String(getProtocolString(IrReceiver.decodedIRData.protocol)) +
+                          " | Address: 0x" +
+                          String(IrReceiver.decodedIRData.address, HEX) +
+                          " | Command: 0x" +
+                          String(IrReceiver.decodedIRData.command, HEX);
         irrecv.resume ();
     }
 }

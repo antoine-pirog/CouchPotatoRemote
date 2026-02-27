@@ -1,9 +1,9 @@
-
 #include <WiFi.h>
 #include "WiFiUtils.h"
 #include "secret.h"
 #include "remote_xanlite_rgb.h"
 #include "index_webui.h"
+#include "context.h"
 
 WiFiServer server(80); // Set web server port number to 80  
 String header; // Variable to store the HTTP request
@@ -34,8 +34,19 @@ void WiFi_init(void){
 
 void handle_requests(const String& request, WiFiClient& client) {
     if (xanlite_rgb_remote.handle_requests(request, client)){}
+    else if (request.indexOf("GET /recvir") >= 0) {
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-Type: text/plain");
+        client.println("Connection: close");
+        client.println();
+        client.println(last_ir_command);
+        }
     else {
         // Serve main page
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-Type: text/html");
+        client.println("Connection: close");
+        client.println();
         client.printf("%s", index_webui); // index_webui defined in index_webui.h
     }
 }
