@@ -1,7 +1,7 @@
 import json
 import glob
 
-project_folder = "./irRemoteESP32/"
+project_folder = "./CPR_ESP32/"
 
 gen_config_files = glob.glob(f"{project_folder}/*.json")
 
