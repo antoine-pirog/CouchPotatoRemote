@@ -66,7 +66,7 @@ void irTransmitter_init(void){
     digitalWrite(LED_BUILTIN, LOW);
 }
 
-void transmit(IrCommand cmd){
+void transmitNEC(IrCommand cmd){
     digitalWrite(LED_BUILTIN, HIGH);
     irsend.sendNEC(cmd.address, cmd.command, REPEATS);
     Serial.print("Transmitted : @0x");

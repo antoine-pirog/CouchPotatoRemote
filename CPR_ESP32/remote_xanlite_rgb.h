@@ -3,7 +3,7 @@
 
 #include "remotes.h"
 
-class XanliteRgbRemote : public Remote {
+class XanliteRgbRemote : public RemoteNEC {
 public:
     enum class Command : uint8_t {
         ON          = 0x03,
@@ -34,7 +34,7 @@ public:
     };
 
     XanliteRgbRemote()
-        : Remote(0xEF00) {}
+        : RemoteNEC(0xEF00) {}
 
     IrCommand build(Command cmd) const {
         return buildCommand(static_cast<uint8_t>(cmd));

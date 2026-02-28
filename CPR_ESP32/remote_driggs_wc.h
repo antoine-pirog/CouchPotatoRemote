@@ -3,7 +3,7 @@
 
 #include "remotes.h"
 
-class DriggsWcRemote : public Remote {
+class DriggsWcRemote : public RemoteNEC {
 public:
     enum class Command : uint8_t {
         ON            = 0x61,
@@ -16,7 +16,7 @@ public:
     };
 
     DriggsWcRemote()
-        : Remote(0x0000) {}
+        : RemoteNEC(0x0000) {}
 
     IrCommand build(Command cmd) const {
         return buildCommand(static_cast<uint8_t>(cmd));

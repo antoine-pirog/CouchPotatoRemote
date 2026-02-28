@@ -21,7 +21,7 @@ void DriggsWcRemote::transmit_cmdstr(const String& cmdstr){
     else if (cmdstr == "COLOR_WARM"   ) cmd = Cmd::COLOR_WARM;
     else return;
 
-    transmit(build(cmd));
+    transmitNEC(build(cmd));
 }
 
 int DriggsWcRemote::handle_requests(const String& request, WiFiClient& client){

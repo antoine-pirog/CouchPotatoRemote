@@ -38,7 +38,7 @@ void XanliteRgbRemote::transmit_cmdstr(const String& cmdstr){
     else if (cmdstr == "MAGENTA"   ) cmd = Cmd::MAGENTA;
     else return;
 
-    transmit(build(cmd));
+    transmitNEC(build(cmd));
 }
 
 int XanliteRgbRemote::handle_requests(const String& request, WiFiClient& client){

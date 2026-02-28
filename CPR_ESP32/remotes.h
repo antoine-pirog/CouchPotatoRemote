@@ -11,16 +11,16 @@ struct IrCommand {
 };
 
 // Base class for all remotes
-class Remote {
+class RemoteNEC {
 protected:
     uint16_t address_;     // The IR address for this specific remote (accessible inside class, inside derived classes, inaccessible by others)
 
 public:
     // Constructor
-    explicit Remote(uint16_t addr) : address_(addr){} // Prevent accidental implicit conversions
+    explicit RemoteNEC(uint16_t addr) : address_(addr){} // Prevent accidental implicit conversions
         
     // Destructor
-    virtual ~Remote() = default;
+    virtual ~RemoteNEC() = default;
 
     // Virtual function to build an IR command
     virtual IrCommand buildCommand(uint8_t cmd) const { return { address_, cmd }; }
