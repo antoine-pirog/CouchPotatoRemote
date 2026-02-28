@@ -1,81 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xanlite RGB Remote</title>
 
 <style>
+:root {
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    gap: 10px;
-    max-width: 450px;
+/* Remote container */
+.remote-wrapper {
+    width: clamp(320px, 95vw, 520px); /* responsive but controlled */
 }
 
-.btn {
-    padding: 15px;
+.header {
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* FORCE 4 COLUMNS */
+.remote-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+/* Buttons */
+.btn {
+    padding: 18px 8px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
     cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    user-select: none;
-    border: 1px solid #444;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    transition: transform 0.08s ease, box-shadow 0.1s ease;
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.93);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+}
+
+.control {
+    background: #e5e7eb;
+}
+
+.power-on {
+    background: #16a34a;
+    color: white;
+}
+
+.power-off {
+    background: #dc2626;
+    color: white;
+}
+
+.effect {
+    background: #6b7280;
+    color: white;
+}
+
+.white-text {
+    color: white;
+}
+
+/* Larger buttons on desktop */
+@media (min-width: 700px) {
+    .btn {
+        padding: 22px 10px;
+        font-size: 16px;
+    }
 }
 </style>
-
-<script>
-function sendCommand(cmd) {
-    fetch("/remote-xanlite-rgb?cmd=" + cmd)
-        .then(response => console.log("Sent:", cmd))
-        .catch(error => console.error(error));
-}
-</script>
-
 </head>
 
 <body>
 
-<h2>Xanlite RGB Remote</h2>
+<div class="remote-wrapper">
+    <div class="header">
+        <h1>Xanlite RGB Remote</h1>
+    </div>
 
-<div class="container">
-    <div class="btn" onclick="sendCommand('BRIGHTER')">+</div>
-    <div class="btn" onclick="sendCommand('DIMMER')">-</div>
-    <div class="btn" onclick="sendCommand('OFF')">Off</div>
-    <div class="btn" onclick="sendCommand('ON')">On</div>
-    
-    <div class="btn" onclick="sendCommand('RED')"        style="background:#ff0000">Red</div>
-    <div class="btn" onclick="sendCommand('GREEN')"      style="background:#00ff00">Green</div>
-    <div class="btn" onclick="sendCommand('WHITE')"      style="background:#ffffff">White</div>
-    <div class="btn" onclick="sendCommand('BLUE')"       style="background:#0000ff">Blue</div>
-    
-    <div class="btn" onclick="sendCommand('ORANGE')"     style="background:#FF6300">Orange</div>
-    <div class="btn" onclick="sendCommand('TEAL')"       style="background:#006D58">Teal</div>
-    <div class="btn" onclick="sendCommand('INDIGO')"     style="background:#5D00FF">Indigo</div>
-    <div class="btn" onclick="sendCommand('FLASH')"      style="background:#808080">Flash</div>
-    
-    <div class="btn" onclick="sendCommand('YELLOW')"     style="background:#FFFF00">Yellow</div>
-    <div class="btn" onclick="sendCommand('CYAN')"       style="background:#00DAD4">Cyan</div>
-    <div class="btn" onclick="sendCommand('LAVENDER')"   style="background:#B300CA">Lavender</div>
-    <div class="btn" onclick="sendCommand('STROBE')"     style="background:#808080">Strobe</div>
-    
-    <div class="btn" onclick="sendCommand('LIME')"       style="background:#37CC35">Lime</div>
-    <div class="btn" onclick="sendCommand('SKYBLUE')"    style="background:#3576CC">Sky Blue</div>
-    <div class="btn" onclick="sendCommand('PURPLE')"     style="background:#84004C">purple</div>
-    <div class="btn" onclick="sendCommand('FADE')"       style="background:#808080">Fade</div>
-      
-    <div class="btn" onclick="sendCommand('LIGHTGREEN')" style="background:#0A9800">Light Green</div>
-    <div class="btn" onclick="sendCommand('LIGHTBLUE')"  style="background:#0062D1">Light Blue</div>
-    <div class="btn" onclick="sendCommand('MAGENTA')"    style="background:#CA0092">Magenta</div>
-    <div class="btn" onclick="sendCommand('SMOOTH')"     style="background:#808080">Smooth</div>
+    <div class="card">
+        <div class="remote-grid">
+
+            <button class="btn control"   onclick="sendCommand('BRIGHTER')">+</button>
+            <button class="btn control"   onclick="sendCommand('DIMMER')">−</button>
+            <button class="btn power-off" onclick="sendCommand('OFF')">Off</button>
+            <button class="btn power-on"  onclick="sendCommand('ON')">On</button>
+
+            <button class="btn white-text" style="background:#ff0000" onclick="sendCommand('RED')">Red</button>
+            <button class="btn"            style="background:#00ff00" onclick="sendCommand('GREEN')">Green</button>
+            <button class="btn"            style="background:#ffffff" onclick="sendCommand('WHITE')">White</button>
+            <button class="btn white-text" style="background:#0000ff" onclick="sendCommand('BLUE')">Blue</button>
+
+            <button class="btn"            style="background:#FF6300" onclick="sendCommand('ORANGE')">Orange</button>
+            <button class="btn white-text" style="background:#006D58" onclick="sendCommand('TEAL')">Teal</button>
+            <button class="btn white-text" style="background:#5D00FF" onclick="sendCommand('INDIGO')">Indigo</button>
+            <button class="btn effect"                                  onclick="sendCommand('FLASH')">Flash</button>
+
+            <button class="btn"            style="background:#FFFF00" onclick="sendCommand('YELLOW')">Yellow</button>
+            <button class="btn"            style="background:#00DAD4" onclick="sendCommand('CYAN')">Cyan</button>
+            <button class="btn white-text" style="background:#B300CA" onclick="sendCommand('LAVENDER')">Lavender</button>
+            <button class="btn effect"                                  onclick="sendCommand('STROBE')">Strobe</button>
+
+            <button class="btn"            style="background:#37CC35" onclick="sendCommand('LIME')">Lime</button>
+            <button class="btn white-text" style="background:#3576CC" onclick="sendCommand('SKYBLUE')">Sky Blue</button>
+            <button class="btn white-text" style="background:#84004C" onclick="sendCommand('PURPLE')">Purple</button>
+            <button class="btn effect"                                  onclick="sendCommand('FADE')">Fade</button>
+
+            <button class="btn white-text" style="background:#0A9800" onclick="sendCommand('LIGHTGREEN')">Light Green</button>
+            <button class="btn white-text" style="background:#0062D1" onclick="sendCommand('LIGHTBLUE')">Light Blue</button>
+            <button class="btn white-text" style="background:#CA0092" onclick="sendCommand('MAGENTA')">Magenta</button>
+            <button class="btn effect"                                  onclick="sendCommand('SMOOTH')">Smooth</button>
+
+        </div>
+    </div>
 </div>
+
+<script>
+function sendCommand(cmd) {
+    fetch("/remote-xanlite-rgb?cmd=" + encodeURIComponent(cmd))
+        .catch(error => console.error("Error:", error));
+}
+</script>
 
 </body>
 </html>

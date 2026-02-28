@@ -44,10 +44,10 @@ void irReceiver_handler(void){
         Serial.println("---------------");
         // Summary string
         last_ir_command = "Protocol: " +
-                          String(getProtocolString(IrReceiver.decodedIRData.protocol)) +
-                          " | Address: 0x" +
-                          String(IrReceiver.decodedIRData.address, HEX) +
-                          " | Command: 0x" +
+                          String(getProtocolString(IrReceiver.decodedIRData.protocol)) + "\n" +
+                          "Address : 0x" +
+                          String(IrReceiver.decodedIRData.address, HEX) + "\n" +
+                          "Command : 0x" +
                           String(IrReceiver.decodedIRData.command, HEX);
         irrecv.resume ();
     }
