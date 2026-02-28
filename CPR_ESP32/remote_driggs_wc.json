@@ -1,0 +1,8 @@
+{
+    "webui" : {
+        "filename_html"   : "remote_driggs_wc.html",
+        "filename_h"      : "remote_driggs_wc_webui.h",
+        "htmlstring_name" : "driggs_wc_webui",
+        "h_guard_block"   : "DRIGGS_WC_WEBUI_H"
+    }
+}

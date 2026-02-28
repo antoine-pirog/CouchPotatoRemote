@@ -2,6 +2,7 @@
 #include "WiFiUtils.h"
 #include "secret.h"
 #include "remote_xanlite_rgb.h"
+#include "remote_driggs_wc.h"
 #include "index_webui.h"
 #include "context.h"
 
@@ -14,6 +15,7 @@ unsigned long previousTime = 0; // Previous time
 const long timeoutTime = 2000; // Define timeout time in milliseconds (example: 2000ms = 2s)
 
 XanliteRgbRemote xanlite_rgb_remote;
+DriggsWcRemote driggs_wc_remote;
 
 void WiFi_init(void){
     /* WiFi server initialization */
@@ -33,7 +35,8 @@ void WiFi_init(void){
 }
 
 void handle_requests(const String& request, WiFiClient& client) {
-    if (xanlite_rgb_remote.handle_requests(request, client)){}
+    if      (xanlite_rgb_remote.handle_requests(request, client)){}
+    else if (driggs_wc_remote.handle_requests(request, client)){}
     else if (request.indexOf("GET /recvir") >= 0) {
         client.println("HTTP/1.1 200 OK");
         client.println("Content-Type: text/plain");

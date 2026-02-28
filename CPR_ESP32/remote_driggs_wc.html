@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driggs Warm/Cold Remote</title>
+
+<style>
+:root {
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Remote container */
+.remote-wrapper {
+    width: clamp(320px, 95vw, 520px); /* responsive but controlled */
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* FORCE 4 COLUMNS */
+.remote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+/* Buttons */
+.btn {
+    padding: 18px 8px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    transition: transform 0.08s ease, box-shadow 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.93);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+}
+
+.control {
+    background: #e5e7eb;
+}
+
+.power-on {
+    background: #16a34a;
+    color: white;
+}
+
+.power-off {
+    background: #dc2626;
+    color: white;
+}
+
+.effect {
+    background: #6b7280;
+    color: white;
+}
+
+.white-text {
+    color: white;
+}
+
+/* Larger buttons on desktop */
+@media (min-width: 700px) {
+    .btn {
+        padding: 22px 10px;
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="remote-wrapper">
+    <div class="header">
+        <h1>Driggs Warm/Cold Remote</h1>
+    </div>
+
+    <div class="card">
+        <div class="remote-grid">
+            <button class="btn power-on"  onclick="sendCommand('ON')">On</button>
+            <span></span>
+            <button class="btn power-off" onclick="sendCommand('OFF')">Off</button>
+            
+            <span></span>
+            <button class="btn control"   onclick="sendCommand('BRIGHTER')">+</button>
+            <span></span>
+
+            <button class="btn white-text" style="background:#3576CC" onclick="sendCommand('COLD')">Cold</button>
+            <button class="btn"            style="background:#ffffff" onclick="sendCommand('NUTRAL')">Neutral</button>
+            <button class="btn whiteètext" style="background:#ffd900" onclick="sendCommand('WARM')">Warm</button>
+            
+            <span></span>
+            <button class="btn control"   onclick="sendCommand('DIMMER')">−</button>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<script>
+function sendCommand(cmd) {
+    fetch("/remote-driggs-wc?cmd=" + encodeURIComponent(cmd))
+        .catch(error => console.error("Error:", error));
+}
+</script>
+
+</body>
+</html>
