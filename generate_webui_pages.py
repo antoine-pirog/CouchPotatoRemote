@@ -5,6 +5,9 @@ project_folder = "./CPR_ESP32/"
 
 gen_config_files = glob.glob(f"{project_folder}/*.json")
 
+def reformat_html(html_line):
+    return html_line.strip().replace('"', r'\"')
+
 for gen_config_file in gen_config_files:
     print(f"Generating h file for {gen_config_file} ...")
     with open(gen_config_file, "r") as f:
@@ -16,7 +19,7 @@ for gen_config_file in gen_config_files:
 
     with open(f"{project_folder}/{filename_html}", "r", encoding="utf-8") as fin:
         with open(f"{project_folder}/{filename_h}", "w", encoding="utf-8") as fout:
-            html_string = r"\n".join([l.strip().replace('"', r'\"') for l in fin.readlines()])
+            html_string = r"\n".join([reformat_html(l) for l in fin.readlines()])
             fout.write(f"#ifndef {h_guard_block}\n")
             fout.write(f"#define {h_guard_block}\n")
             fout.write(f"const char* {htmlstring_name} = \"{html_string}\";\n")
