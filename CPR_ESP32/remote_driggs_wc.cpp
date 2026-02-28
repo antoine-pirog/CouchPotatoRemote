@@ -12,13 +12,13 @@ void DriggsWcRemote::transmit_cmdstr(const String& cmdstr){
     using Cmd = DriggsWcRemote::Command; 
     Cmd cmd;
 
-    if      (cmdstr == "ON"          ) cmd = Cmd::ON;
-    else if (cmdstr == "OFF"         ) cmd = Cmd::OFF;
-    else if (cmdstr == "BRIGHTER"    ) cmd = Cmd::BRIGHTER;
-    else if (cmdstr == "DIMMER"      ) cmd = Cmd::DIMMER;
-    else if (cmdstr == "COLOR_BLUE"  ) cmd = Cmd::COLOR_BLUE;
-    else if (cmdstr == "COLOR_YELLOW") cmd = Cmd::COLOR_YELLOW;
-    else if (cmdstr == "COLOR_WHITE" ) cmd = Cmd::COLOR_WHITE;
+    if      (cmdstr == "ON"           ) cmd = Cmd::ON;
+    else if (cmdstr == "OFF"          ) cmd = Cmd::OFF;
+    else if (cmdstr == "BRIGHTER"     ) cmd = Cmd::BRIGHTER;
+    else if (cmdstr == "DIMMER"       ) cmd = Cmd::DIMMER;
+    else if (cmdstr == "COLOR_COLD"   ) cmd = Cmd::COLOR_COLD;
+    else if (cmdstr == "COLOR_NEUTRAL") cmd = Cmd::COLOR_NEUTRAL;
+    else if (cmdstr == "COLOR_WARM"   ) cmd = Cmd::COLOR_WARM;
     else return;
 
     transmit(build(cmd));

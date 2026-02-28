@@ -6,13 +6,13 @@
 class DriggsWcRemote : public Remote {
 public:
     enum class Command : uint8_t {
-        ON           = 0x61,
-        OFF          = 0xA1,
-        BRIGHTER     = 0x41,
-        DIMMER       = 0x21,
-        COLOR_BLUE   = 0xC1,
-        COLOR_YELLOW = 0x81,
-        COLOR_WHITE  = 0x08
+        ON            = 0x61,
+        OFF           = 0xA1,
+        BRIGHTER      = 0x41,
+        DIMMER        = 0x21,
+        COLOR_COLD    = 0xC1,
+        COLOR_NEUTRAL = 0x81,
+        COLOR_WARM    = 0x08
     };
 
     DriggsWcRemote()
