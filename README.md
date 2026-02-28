@@ -6,6 +6,8 @@ Because I keep losing my remotes. And when I do find them, their batteries are d
 The ESP32 acts as a small HTTP server and serves web-based remote control interfaces.  
 Each remote has its own page and command handler.
 
+![screenshot](images/screenshot.png)
+
 ## Features
 
 - Web UIs served directly from ESP32 :
