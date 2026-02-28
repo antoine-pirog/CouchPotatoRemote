@@ -1,5 +1,6 @@
 #include <IRremote.h>
 #include <cstdint>
+#include <Arduino.h> 
 #include "irUtils.h"
 #include "remotes.h"
 #include "context.h"
@@ -59,12 +60,18 @@ IRsend irsend(TX_DATA_PIN);
 void irTransmitter_init(void){  
     /* IR Transmitter initialization */
     pinMode(TX_DATA_PIN, OUTPUT);
+
+    /* Builting LED TX indicator */
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW);
 }
 
 void transmit(IrCommand cmd){
+    digitalWrite(LED_BUILTIN, HIGH);
     irsend.sendNEC(cmd.address, cmd.command, REPEATS);
     Serial.print("Transmitted : @0x");
     Serial.print(cmd.address, HEX);
     Serial.print(" - 0x");
     Serial.println(cmd.command, HEX);
+    digitalWrite(LED_BUILTIN, LOW);
 }
