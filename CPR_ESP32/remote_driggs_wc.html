@@ -29,7 +29,7 @@ body {
 
 /* Remote container */
 .remote-wrapper {
-    width: clamp(320px, 95vw, 520px); /* responsive but controlled */
+    width: clamp(320px, 95vw, 520px);
 }
 
 .header {
@@ -91,6 +91,33 @@ body {
     color: white;
 }
 
+/* Back link */
+.back-container {
+    margin-top: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: #e5e7eb;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: transform 0.08s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.back-link:hover {
+    background: #d1d5db;
+}
+
+.back-link:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
 /* Larger buttons on desktop */
 @media (min-width: 700px) {
     .btn {
@@ -126,6 +153,10 @@ body {
             <button class="btn control"   onclick="sendCommand('DIMMER')">−</button>
             <span></span>
         </div>
+    </div>
+
+    <div class="back-container">
+        <a href="/index" class="back-link">← Back to Index</a>
     </div>
 </div>
 
