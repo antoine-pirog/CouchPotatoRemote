@@ -1,19 +1,19 @@
-#include <IRremote.h>
-#include <cstdint>
-#include <Arduino.h> 
-#include "irUtils.h"
-#include "remotes.h"
-#include "context.h"
-
 /* RECEIVER */
 #define RX_DATA_PIN 14
 #define RX_VDD_PIN  12
 #define RX_GND_PIN  13
 
 /* EMITTER */
-#define TX_DATA_PIN 4
-
+#define IR_SEND_PIN 4
 #define REPEATS 1
+
+/* INCLUSIONS */
+#include <Arduino.h> 
+#include <IRremote.hpp>
+#include <cstdint>
+#include "irUtils.h"
+#include "remotes.h"
+#include "context.h"
 
 /* Globals */
 IRrecv irrecv (RX_DATA_PIN);
@@ -55,23 +55,10 @@ void irReceiver_handler(void){
 }
 
 
-IRsend irsend(TX_DATA_PIN);
-
 void irTransmitter_init(void){  
-    /* IR Transmitter initialization */
-    pinMode(TX_DATA_PIN, OUTPUT);
-
-    /* Builting LED TX indicator */
-    pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW);
+    IrSender.begin();
 }
 
 void transmitNEC(IrCommand cmd){
-    digitalWrite(LED_BUILTIN, HIGH);
-    irsend.sendNEC(cmd.address, cmd.command, REPEATS);
-    Serial.print("Transmitted : @0x");
-    Serial.print(cmd.address, HEX);
-    Serial.print(" - 0x");
-    Serial.println(cmd.command, HEX);
-    digitalWrite(LED_BUILTIN, LOW);
+    IrSender.sendNEC(cmd.address, cmd.command, REPEATS);
 }
